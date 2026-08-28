@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Name: clean_xfce.py
@@ -6,7 +6,7 @@ Purpose: Clean local Xfce repository directories
 
 source: https://gitlab.com/kevinbowen/xfce-repocapp
 version: 0.8.7
-updated: 20230314
+updated: 20260827
 @author: kevin.bowen@gmail.com
 """
 
@@ -34,7 +34,7 @@ parser.add_argument(
         "www",
         "all_components",
     ],
-    help="Specify an Xfce component group" " directory to clean.",
+    help="Specify an Xfce component group directory to clean.",
 )
 parser.add_argument("--version", action="version", version="%(prog)s 0.8.7")
 args = parser.parse_args()
@@ -71,7 +71,8 @@ def clean_xfce(component, comp_list):
                 os.chdir(item)
                 print(f"\nCleaning {item} directory...\n")
                 time.sleep(1.5)
-                os.system("make -s clean")
+                # ruff: ignore[start-process-with-a-shell]
+                os.system("make -s clean")  # ruff: ignore[start-process-with-partial-path]
                 success_count += 1
                 print(f"\nExiting {item} directory...\n")
                 print(
@@ -110,9 +111,7 @@ def main(component_group_name):
         for comp, cglist in cgroup_listname.items():
             clean_xfce(component=comp, comp_list=cglist)
     else:
-        clean_xfce(
-            component=component_group_name, comp_list=component_group_name
-        )
+        clean_xfce(component=component_group_name, comp_list=component_group_name)
 
 
 if __name__ == "__main__":

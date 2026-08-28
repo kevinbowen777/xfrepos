@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Name: test_clone_xfce.py
@@ -6,14 +6,14 @@ Purpose: test clone_xfce.py script
 
 source: https://gitlab.com/kevinbowen/xfce-repocapp
 version: 0.8.7
-updated: 20230315
+updated: 20260828
 @author: kevin.bowen@gmail.com
 """
 
 import unittest
 
-from cappdata import component_list  # noqa: F401
-from clone_xfce import clone_xfce  # noqa: F401
+from cappdata import component_list  # ruff: ignore[unused-import]
+from clone_xfce import clone_xfce  # ruff: ignore[unused-import]
 
 args = "bindings"
 
