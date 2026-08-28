@@ -1,13 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Name: purge_xfce.py
-Purpose: delete the local Xfce repositories originally pulled from
+Purpose: Delete local Xfce repositories installed by clone_xfce.py from
            https://gitlab.xfce.org
 
 source: https://gitlab.com/kevinbowen/xfce-repocapp
 version: 0.8.7
-updated: 20220114
+updated: 20260827
 @author: kevin.bowen@gmail.com
 """
 
@@ -62,8 +62,7 @@ def purge_xfce(component, comp_list):
     success_count = 0
 
     confirm = query_yes_no(
-        f"Are you sure you want to remove the "
-        f"Xfce '{component}' repositories? "
+        f"Are you sure you want to remove the Xfce '{component}' repositories? "
     )
 
     if confirm == "yes":
@@ -84,10 +83,7 @@ def purge_xfce(component, comp_list):
                         )
                         print("\u2248" * 16)
                     except FileNotFoundError:
-                        print(
-                            f"The directory '{item}' does not exist. "
-                            f"Skipping..."
-                        )
+                        print(f"The directory '{item}' does not exist. Skipping...")
                         print("\u2248" * 16)
             os.chdir("..")
             shutil.rmtree(component)
@@ -118,9 +114,7 @@ def main(component_group_name):
         for comp, cglist in cgroup_listname.items():
             purge_xfce(component=comp, comp_list=cglist)
     else:
-        purge_xfce(
-            component=component_group_name, comp_list=component_group_name
-        )
+        purge_xfce(component=component_group_name, comp_list=component_group_name)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Name: repocapp.py
@@ -7,12 +7,12 @@ Purpose: Clones Xfce repositories pulled from
 
 source: https://gitlab.com/kevinbowen/xfce-repocapp
 version: 0.8.7
-updated: 20230314
+updated: 20260827
 @author: kevin.bowen@gmail.com
 """
 
 import os
-import subprocess  # noqa: S404
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
 import sys
 from pathlib import Path
 
@@ -22,52 +22,52 @@ menus = {
     "clone": [
         "apps",
         "bindings",
-        "xfce",
         "panel-plugins",
         "thunar-plugins",
         "www",
+        "xfce",
         "all",
     ],
     "build": [
         "apps",
         "bindings",
-        "xfce",
         "panel-plugins",
         "thunar-plugins",
+        "xfce",
         "all",
     ],
     "install": [
         "apps",
         "bindings",
-        "xfce",
         "panel-plugins",
         "thunar-plugins",
+        "xfce",
         "all",
     ],
     "clean": [
         "apps",
         "bindings",
-        "xfce",
         "panel-plugins",
         "thunar-plugins",
+        "xfce",
         "all",
     ],
     "pull": [
         "apps",
         "bindings",
-        "xfce",
         "panel-plugins",
         "thunar-plugins",
         "www",
+        "xfce",
         "all",
     ],
     "purge": [
         "apps",
         "bindings",
-        "xfce",
         "panel-plugins",
         "thunar-plugins",
         "www",
+        "xfce",
         "all",
     ],
     "quit": "quit",
@@ -79,7 +79,7 @@ os.chdir(path)
 
 def main_menu():
     """Display selection of available actions to take with repositories."""
-    os.system("/usr/bin/clear")  # noqa: S605
+    os.system("/usr/bin/clear")  # ruff: ignore[start-process-with-a-shell]
     main_banner = "\u2248: xfce-repocapp: local Xfce repository maintenance :\u2248"
     border = "\u2248" * len(main_banner)
     print(f"{border}\n{main_banner}\n{border}")
@@ -101,14 +101,14 @@ def main_menu():
             else:
                 action = main_list[choice - 1]
                 sub_menus(action)
-    except (ValueError, EOFError):
+    except ValueError, EOFError:
         print("Invalid input. Try again.")
         main_menu()
 
 
 def sub_menus(action):
     """Display actions to take upon a specific repository."""
-    os.system("/usr/bin/clear")  # noqa: S605
+    os.system("/usr/bin/clear")  # ruff: ignore[start-process-with-a-shell]
     banner = f"\u2248: xfce-repocapp: {action} local Xfce repositories :\u2248"
     border = "\u2248" * len(banner)
     print(f"{border}\n{banner}\n{border}")
@@ -140,10 +140,10 @@ def sub_menus(action):
                     component = component_list[answer - 1]
                 script = action + "_xfce.py"
                 command = f"{path}/{script} -c {component}"
-                subprocess.run([command], shell=True)  # noqa: S602
+                subprocess.run([command], shell=True)  # ruff: ignore[subprocess-popen-with-shell-equals-true]
                 press_any_key()
                 main_menu()
-    except (ValueError, EOFError):
+    except ValueError, EOFError:
         print("Invalid input. Try again.")
         sub_menus(action)
 

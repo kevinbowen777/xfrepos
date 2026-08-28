@@ -1,4 +1,14 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+
+"""
+Name: build.py
+Purpose: Clean local Xfce repository directories
+
+source: https://gitlab.com/kevinbowen/xfce-repocapp
+version: 0.8.7
+updated: 20260827
+@author: kevin.bowen@gmail.com
+"""
 
 import argparse
 import os
@@ -8,9 +18,7 @@ from pathlib import Path
 
 from cappdata import component_list
 
-parser = argparse.ArgumentParser(
-    description="Build groups of Xfce components locally."
-)
+parser = argparse.ArgumentParser(description="Build groups of Xfce components locally.")
 parser.add_argument(
     "-c",
     "--component",
@@ -18,10 +26,10 @@ parser.add_argument(
     choices=[
         "apps",
         "bindings",
-        "xfce",
         "panel-plugins",
         "thunar-plugins",
         "www",
+        "xfce",
         "all_components",
     ],
     help="Specify an Xfce component group to build locally.",
@@ -60,10 +68,11 @@ def build_xfce(component, comp_list):
             if p.is_dir():
                 os.chdir(item)
                 print(f"\nRunning autogen.sh for {item} ...\n")
-                os.system("./autogen.sh --prefix=/usr")
+                os.system("./autogen.sh --prefix=/usr")  # ruff: ignore[start-process-with-a-shell]
                 print(f"\nRunning make for {item} ...\n")
                 time.sleep(1.5)
-                os.system("make")
+                # ruff: ignore[start-process-with-a-shell]
+                os.system("make")  # ruff: ignore[start-process-with-partial-path]
                 os.chdir("..")
             else:
                 print("\nNothing to do...\n")
@@ -95,9 +104,7 @@ def main(component_group_name):
         for comp, cglist in cgroup_listname.items():
             build_xfce(component=comp, comp_list=cglist)
     else:
-        build_xfce(
-            component=component_group_name, comp_list=component_group_name
-        )
+        build_xfce(component=component_group_name, comp_list=component_group_name)
 
 
 if __name__ == "__main__":

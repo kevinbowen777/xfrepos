@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="xfce-repocapp-KEVIN-BOWEN",
-    version="0.8.6",
+    version="0.8.7",
     author="Kevin Bowen",
     author_email="kevin.bowen@gmail.com",
     description="Scripts for managing Xfce repositories",
@@ -17,9 +17,9 @@ setuptools.setup(
     },
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         "Operating System :: POSIX :: Linux",
         "Development Status :: 3 - Alpha",
@@ -29,5 +29,5 @@ setuptools.setup(
     ],
     package_dir={},
     packages=setuptools.find_packages(),
-    python_requires=">=3.8",
+    python_requires=">=3.12",
 )

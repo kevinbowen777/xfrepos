@@ -1,19 +1,18 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Name: clone_xfce.py
-Purpose: Clones Xfce repositories pulled from
-           https://gitlab.xfce.org/
+Purpose: Clones Xfce repositories from https://gitlab.xfce.org/
 
 source: https://gitlab.com/kevinbowen/xfce-repocapp
 version: 0.8.7
-updated: 20230314
+updated: 20260827
 @author: kevin.bowen@gmail.com
 """
 
 import argparse
 import os
-import subprocess
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
 import sys
 from pathlib import Path
 
@@ -36,15 +35,13 @@ parser.add_argument(
         "www",
         "all_components",
     ],
-    help="specify an Xfce component group to clone"
-    " from https://gitlab.xfce.org",
+    help="specify an Xfce component group to clone from https://gitlab.xfce.org",
 )
 parser.add_argument("--version", action="version", version="%(prog)s 0.8.7")
 args = parser.parse_args()
 if args.component is None:
     print(
-        "No component was specified. Default to cloning"
-        " the 'bindings' components...."
+        "No component was specified. Default to cloning the 'bindings' components...."
     )
     args.component = "bindings"
 
@@ -79,7 +76,8 @@ def clone_xfce(component, comp_list):
         else:
             try:
                 url = f"https://gitlab.xfce.org/{component}/{item}.git"
-                subprocess.run(["git", "clone", url], stdout=None, check=True)
+                # ruff: ignore[start-process-with-partial-path]
+                subprocess.run(["git", "clone", url], stdout=None, check=True)  # ruff: ignore[subprocess-without-shell-equals-true]
                 success_count += 1
                 print(line_rule)
                 print(f"{item} repository cloned successfully.")
@@ -108,9 +106,7 @@ def main(component_group_name):
         for comp, cglist in cgroup_listname.items():
             clone_xfce(component=comp, comp_list=cglist)
     else:
-        clone_xfce(
-            component=component_group_name, comp_list=component_group_name
-        )
+        clone_xfce(component=component_group_name, comp_list=component_group_name)
 
 
 if __name__ == "__main__":

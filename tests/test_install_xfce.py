@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Name: test_install_xfce.py
@@ -6,14 +6,14 @@ Purpose: test install_xfce.py script
 
 source: https://gitlab.com/kevinbowen/xfce-repocapp
 version: 0.8.7
-updated: 20230315
+updated: 20260828
 @author: kevin.bowen@gmail.com
 """
 
 import unittest
 
-from cappdata import component_list, query_yes_no  # noqa: F401
-from install_xfce import install_xfce  # noqa: F401
+from cappdata import component_list, query_yes_no  # ruff: ignore[unused-import]
+from install_xfce import install_xfce  # ruff: ignore[unused-import]
 
 args = "bindings"
 

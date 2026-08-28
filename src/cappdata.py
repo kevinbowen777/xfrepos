@@ -5,7 +5,7 @@ Purpose: component lists and query function for use with
 
 source: https://gitlab.com/kevinbowen/xfce-repocapp
 version: 0.8.7
-updated: 20230109
+updated: 20260827
 @author: kevin.bowen@gmail.com
 """
 
@@ -40,30 +40,8 @@ def component_list(component_group_list):
         return apps
 
     elif component_group_list == "bindings":
-        bindings = ["thunarx-python", "xfce4-vala"]
+        bindings = ["thunarx-python", "xfce4-rs", "xfce4-vala"]
         return bindings
-
-    elif component_group_list == "xfce":
-        xfce = [
-            "exo",
-            "garcon",
-            "libxfce4ui",
-            "libxfce4util",
-            "libxfce4windowing",
-            "thunar",
-            "thunar-volman",
-            "tumbler",
-            "xfce4-appfinder",
-            "xfce4-dev-tools",
-            "xfce4-panel",
-            "xfce4-power-manager",
-            "xfce4-session",
-            "xfce4-settings",
-            "xfconf",
-            "xfdesktop",
-            "xfwm4",
-        ]
-        return xfce
 
     elif component_group_list == "panel-plugins":
         panel_plugins = [
@@ -72,10 +50,8 @@ def component_list(component_group_list):
             "xfce4-clipman-plugin",
             "xfce4-cpufreq-plugin",
             "xfce4-cpugraph-plugin",
-            "xfce4-datetime-plugin",
             "xfce4-diskperf-plugin",
             "xfce4-docklike-plugin",
-            "xfce4-embed-plugin",
             "xfce4-eyes-plugin",
             "xfce4-fsguard-plugin",
             "xfce4-generic-slider",
@@ -91,7 +67,6 @@ def component_list(component_group_list):
             "xfce4-sample-plugin",
             "xfce4-sensors-plugin",
             "xfce4-smartbookmark-plugin",
-            "xfce4-statusnotifier-plugin",
             "xfce4-stopwatch-plugin",
             "xfce4-systemload-plugin",
             "xfce4-time-out-plugin",
@@ -116,7 +91,6 @@ def component_list(component_group_list):
 
     elif component_group_list == "www":
         www = [
-            "archive.xfce.org",
             "blog.xfce.org",
             "cdn.xfce.org",
             "forum.xfce.org",
@@ -126,13 +100,37 @@ def component_list(component_group_list):
         ]
         return www
 
+    elif component_group_list == "xfce":
+        xfce = [
+            "exo",
+            "garcon",
+            "libxfce4ui",
+            "libxfce4util",
+            "libxfce4windowing",
+            "thunar",
+            "thunar-volman",
+            "tumbler",
+            "xfce4-appfinder",
+            "xfce4-dev-tools",
+            "xfce4-panel",
+            "xfce4-power-manager",
+            "xfce4-session",
+            "xfce4-settings",
+            "xfce-wayland-protocols",
+            "xfconf",
+            "xfdesktop",
+            "xfwl4",
+            "xfwm4",
+        ]
+        return xfce
+
     elif component_group_list == "all_components":
         all_components = {
             "apps": "apps",
             "bindings": "bindings",
-            "xfce": "xfce",
             "panel-plugins": "panel-plugins",
             "thunar-plugins": "thunar-plugins",
+            "xfce": "xfce",
             "www": "www",
         }
         return all_components
@@ -170,6 +168,4 @@ def query_yes_no(question, answer="no"):
             elif answer in valid:
                 return valid[choice]
         except KeyError:
-            sys.stdout.write(
-                "Please respond with 'yes' or 'no' " "(or 'y' or 'n').\n"
-            )
+            sys.stdout.write("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")

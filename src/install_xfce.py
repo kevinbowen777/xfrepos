@@ -1,4 +1,14 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+
+"""
+Name: install._xfce.py
+Purpose: Clean local Xfce repository directories
+
+source: https://gitlab.com/kevinbowen/xfce-repocapp
+version: 0.8.7
+updated: 20260827
+@author: kevin.bowen@gmail.com
+"""
 
 import argparse
 import os
@@ -8,8 +18,7 @@ from pathlib import Path
 from cappdata import component_list, query_yes_no
 
 parser = argparse.ArgumentParser(
-    description="Install groups of Xfce components"
-    " either locally or system-wide."
+    description="Install groups of Xfce components either locally or system-wide."
 )
 parser.add_argument(
     "-c",
@@ -24,8 +33,7 @@ parser.add_argument(
         "www",
         "all_components",
     ],
-    help="specify an Xfce component group to install"
-    " either locally or system-wide.",
+    help="specify an Xfce component group to install either locally or system-wide.",
 )
 parser.add_argument("--version", action="version", version="%(prog)s 0.8.7")
 args = parser.parse_args()
@@ -62,12 +70,14 @@ def install_xfce(component, comp_list):
                 )
                 if confirm == "yes":
                     print(f"Installing {item} to the system...")
-                    os.system("sudo make install")
+                    # ruff: ignore[start-process-with-a-shell]
+                    os.system("sudo make install")  # ruff: ignore[start-process-with-partial-path]
                     print("\u2248" * 16)
                     os.chdir("..")
                 else:
                     print(f"Installing {item} locally...")
-                    os.system("make install")
+                    # ruff: ignore[start-process-with-a-shell]
+                    os.system("make install")  # ruff: ignore[start-process-with-partial-path]
                     print("\u2248" * 16)
                     os.chdir("..")
             else:
@@ -100,9 +110,7 @@ def main(component_group_name):
         for comp, cglist in cgroup_listname.items():
             install_xfce(component=comp, comp_list=cglist)
     else:
-        install_xfce(
-            component=component_group_name, comp_list=component_group_name
-        )
+        install_xfce(component=component_group_name, comp_list=component_group_name)
 
 
 if __name__ == "__main__":

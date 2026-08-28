@@ -1,7 +1,7 @@
 import unittest
 
 # import __author__, __version__
-from cappdata import press_any_key  # noqa: F401
+from cappdata import press_any_key  # ruff: ignore[unused-import]
 
 """
 def test_author():

@@ -1,13 +1,12 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Name: pull_xfce.py
-Purpose: update local Xfce repositories pulled from
-           https://gitlab.xfce.org
+Purpose: Update local Xfce repositories pulled from https://gitlab.xfce.org
 
 source: https://gitlab.com/kevinbowen/xfce-repocapp
 version: 0.8.7
-updated: 20230314
+updated: 20260827
 @author: kevin.bowen@gmail.com
 """
 
@@ -35,8 +34,7 @@ parser.add_argument(
         "www",
         "all_components",
     ],
-    help="specify an Xfce component group to pull/update"
-    " from https://gitlab.xfce.org.",
+    help="specify an Xfce component group to pull/update from https://gitlab.xfce.org.",
 )
 parser.add_argument("--version", action="version", version="%(prog)s 0.8.7")
 args = parser.parse_args()
@@ -69,7 +67,8 @@ def pull_xfce(component, comp_list):
             if p.is_dir():
                 os.chdir(item)
                 print(f"Updating {item}...")
-                os.system("git pull")
+                # ruff: ignore[start-process-with-a-shell]
+                os.system("git pull")  # ruff: ignore[start-process-with-partial-path]
                 success_count += 1
                 print(
                     f"\n{success_count}/{len(component_list(comp_list))} "
@@ -107,9 +106,7 @@ def main(component_group_name):
         for comp, cglist in cgroup_listname.items():
             pull_xfce(component=comp, comp_list=cglist)
     else:
-        pull_xfce(
-            component=component_group_name, comp_list=component_group_name
-        )
+        pull_xfce(component=component_group_name, comp_list=component_group_name)
 
 
 if __name__ == "__main__":

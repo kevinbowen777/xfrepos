@@ -4,8 +4,8 @@ import tempfile
 
 import nox
 
-PYTHON_VERSIONS = ["3.10", "3.11", "3.12", "3.13"]
-nox.options.sessions = "lint", "coverage", "tests"
+PYTHON_VERSIONS = ["3.12", "3.13", "3.14"]
+nox.options.sessions = ["lint", "coverage", "tests"]
 locations = (
     "src",
     "./noxfile.py",
@@ -72,8 +72,26 @@ def lint(session):
 
 
 @nox.session(python=PYTHON_VERSIONS)
+def pyright(session):
+    """Run pyright type checker."""
+    session.run("pyright", external=True)
+
+
+@nox.session(python=PYTHON_VERSIONS)
+def audit(session):
+    """Scan dependencies for insecure packages."""
+    install_with_constraints(session, "pip-audit")
+    session.run(
+        "pip-audit",
+        "--desc",
+        "--aliases",
+    )
+
+
+@nox.session(python=PYTHON_VERSIONS)
 def tests(session):
     """Run the test suite."""
+    # args = session.posargs or ["--cov"]
     args = session.posargs
     with tempfile.NamedTemporaryFile() as requirements:
         session.run(
@@ -92,11 +110,12 @@ def tests(session):
         "pytest",
         "pytest-cov",
     )
-    # session.run("pytest", *args)
     session.run(
         "python",
         "-Wonce::DeprecationWarning",
+        # "-Walways::DeprecationWarning",
         "-Im",
         "pytest",
         *args,
+        # "--capture=no",
     )
