@@ -45,7 +45,6 @@ pytest = ">=9.0, <10.0"
 pytest-cov = ">=7.1.0, <8.0"
 pytest-sugar = "1.1.1"
 coverage = { version = ">=7.0.0, <8.0.0", extras = ["toml"] }
-pylint = ">=4.0.7, <5.0.0"
 sphinx = ">= 9.1.0, <10.0"
 
 [tool.coverage.run]
@@ -169,5 +168,5 @@ docstring-code-line-length = "dynamic"
 [build-system]
 # requires = ["setuptools", "wheel"]
 # build-backend = "setuptools.build_meta"
-requires = ["poetry-core>=2.0.0"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"

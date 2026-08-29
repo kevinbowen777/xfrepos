@@ -36,12 +36,22 @@ repos:
       # Run the formatter
       - id: ruff-format
 
+
+  - repo: https://github.com/sphinx-contrib/sphinx-lint
+    rev: v1.0.2
+    hooks:
+      - id: sphinx-lint
+
   - repo: https://github.com/python-poetry/poetry
     rev: 2.4.1
     hooks:
       - id: poetry-check
       - id: poetry-lock
+
+  - repo: https://github.com/python-poetry/poetry-plugin-export
+    rev: 1.10.0
+    hooks:
+      - id: poetry-export
+        args: ["-f", "requirements.txt"]
       # - id: poetry-export
-      #   args: ["-f", "requirements.txt"]
-      # - id: poetry-export
-      # args: ["--with", "dev", "-o", "requirements-dev.txt"]
+      #   args: ["--with", "dev", "-o", "requirements-dev.txt"]
