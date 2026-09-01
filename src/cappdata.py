@@ -1,9 +1,9 @@
 """
 Name: cappdata.py
 Purpose: component lists and query function for use with
-           xfce-repocapp.py and associated scripts
+           xfrepos.py and associated scripts
 
-source: https://gitlab.com/kevinbowen/xfce-repocapp
+source: https://gitlab.com/kevinbowen/xfrepos
 version: 0.8.7
 updated: 20260827
 @author: kevin.bowen@gmail.com

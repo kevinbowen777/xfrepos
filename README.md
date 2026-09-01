@@ -1,20 +1,17 @@
 <div align="center">
 
   [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-  [![GitHub Issues](https://img.shields.io/github/issues/kevinbowen777/xfce-repocapp.svg)](https://github.com/kevinbowen777/xfce-repocapp/issues)
-  [![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://gitlab.com/kevinbowen/xfce-repocapp/-/blob/master/LICENSE)
-  [![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/kevinbowen777/e1cbfcb69276c8b91e37a811b9fab725/raw/xfce-repocapp_covbadge.json)](https://kevinbowen777.github.io/xfce-repocapp/)
+  [![GitHub Issues](https://img.shields.io/github/issues/kevinbowen777/xfrepos.svg)](https://github.com/kevinbowen777/xfrepos/issues)
+  [![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://gitlab.com/kevinbowen/xfrepos/-/blob/master/LICENSE)
+  [![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/kevinbowen777/e1cbfcb69276c8b91e37a811b9fab725/raw/xfrepos_covbadge.json)](https://kevinbowen777.github.io/xfrepos/)
 
 </div>
 
-# Xfce-repocapp
-
-repocapp - repository (C)lone (A)utogen (P)ull (P)urge
-              (This also includes clean & installation scripts)
+# xfrepos
 
 A collection of scripts to maintain local Xfce repositories.
 
-The purpose of the scripts contained in the `xfce-repocapp` repository is to
+The purpose of the scripts contained in the `xfrepos` repository is to
 facilitate managing your local Xfce repositories in bulk.
 Cloning, running automake, installing, purging and updating tasks are
 performed in groups, organized by categories, according to the official
@@ -23,7 +20,7 @@ Xfce repository structure (https://gitlab.xfce.org).
 ----
 ### List of scripts
 #### Menu scripts
-`repocapp.py` - provides a rudimentary menu-driven option to run the scripts.
+`xfrepos.py` - provides a rudimentary menu-driven option to run the scripts.
   This is entirely optional. All of these scripts can be run independently.
 
 ----
@@ -62,12 +59,12 @@ components. This is the equivalent of running, for example, `pull_xfce -c apps`.
 
 ----
 
-### Installation of xfce-repocapp project
+### Installation of xfrepos project
 
-    git clone https://github.com/kevinbowen777/xfce-repocapp.git
+    git clone https://github.com/kevinbowen777/xfrepos.git
 
 ----
 ### Reporting Bugs
 
-   Visit the [Issues page](https://gitlab.com/kevinbowen/xfce-repocapp/-/issues)
+   Visit the [Issues page](https://gitlab.com/kevinbowen/xfrepos/-/issues)
      to view currently open bug reports or open a new issue.

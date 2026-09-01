@@ -4,7 +4,7 @@
 Name: test_clone_xfce.py
 Purpose: test clone_xfce.py script
 
-source: https://gitlab.com/kevinbowen/xfce-repocapp
+source: https://gitlab.com/kevinbowen/xfrepos
 version: 0.8.7
 updated: 20260828
 @author: kevin.bowen@gmail.com

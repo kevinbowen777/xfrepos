@@ -1,6 +1,6 @@
 [project]
-name = "xfce-repocapp"
-version = "0.8.7"
+name = "xfrepos"
+version = "0.9.0"
 description = "A collection of scripts to maintain local Xfce repositories"
 requires-python = ">=3.12.0, <3.15.0"
 dependencies = []
@@ -32,9 +32,9 @@ classifiers = [
 package-mode = true
 
 [project.urls]
-Homepage = "https://github.com/kevinbowen777/xfce-repocapp.git"
-Changelog = "https://github.com/kevinbowen777/xfce-repocapp/NEWS"
-Repository = "https://github.com/kevinbowen777/xfce-repocapp.git"
+Homepage = "https://github.com/kevinbowen777/xfrepos.git"
+Changelog = "https://github.com/kevinbowen777/xfrepos/NEWS"
+Repository = "https://github.com/kevinbowen777/xfrepos.git"
 Documentation = "file:///docs/index.rst"
 
 [tool.poetry.group.dev.dependencies]
@@ -49,7 +49,7 @@ sphinx = ">= 9.1.0, <10.0"
 
 [tool.coverage.run]
 branch = true
-dynamic_context = "test_function"
+# dynamic_context = "test_function"
 source = ["src"]
 omit = [
     "*/__init__.py",
@@ -63,8 +63,8 @@ show_missing = true
 precision = 2
 
 [tool.coverage.html]
-show_contexts = true
-title = "xfce-repocapp coverage report"
+# show_contexts = true
+title = "xfrepos coverage report"
 
 [tool.pytest.ini_options]
 addopts = [

@@ -4,7 +4,7 @@
 Name: clean_xfce.py
 Purpose: Clean local Xfce repository directories
 
-source: https://gitlab.com/kevinbowen/xfce-repocapp
+source: https://gitlab.com/kevinbowen/xfrepos
 version: 0.8.7
 updated: 20260827
 @author: kevin.bowen@gmail.com
@@ -120,5 +120,5 @@ if __name__ == "__main__":
         main(component_group)
     except KeyboardInterrupt:
         print()
-        print("Stopped xfce-repocapp. Exiting...")
+        print("Stopped xfrepos. Exiting...")
         sys.exit()
