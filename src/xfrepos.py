@@ -5,7 +5,7 @@ Name: repocapp.py
 Purpose: Clones Xfce repositories pulled from
            https://gitlab.xfce.org/
 
-source: https://gitlab.com/kevinbowen/xfce-repocapp
+source: https://gitlab.com/kevinbowen/xfrepos
 version: 0.8.7
 updated: 20260827
 @author: kevin.bowen@gmail.com
@@ -80,7 +80,7 @@ os.chdir(path)
 def main_menu():
     """Display selection of available actions to take with repositories."""
     os.system("/usr/bin/clear")  # ruff: ignore[start-process-with-a-shell]
-    main_banner = "\u2248: xfce-repocapp: local Xfce repository maintenance :\u2248"
+    main_banner = "\u2248: xfrepos: local Xfce repository maintenance :\u2248"
     border = "\u2248" * len(main_banner)
     print(f"{border}\n{main_banner}\n{border}")
     main_list = list(menus.keys())
@@ -109,7 +109,7 @@ def main_menu():
 def sub_menus(action):
     """Display actions to take upon a specific repository."""
     os.system("/usr/bin/clear")  # ruff: ignore[start-process-with-a-shell]
-    banner = f"\u2248: xfce-repocapp: {action} local Xfce repositories :\u2248"
+    banner = f"\u2248: xfrepos: {action} local Xfce repositories :\u2248"
     border = "\u2248" * len(banner)
     print(f"{border}\n{banner}\n{border}")
     selection = list(range(1, len(menus[action]) + 1))
@@ -153,5 +153,5 @@ if __name__ == "__main__":
         main_menu()
     except KeyboardInterrupt:
         print()
-        print("Stopped xfce-repocapp. Exiting...")
+        print("Stopped xfrepos. Exiting...")
         sys.exit()

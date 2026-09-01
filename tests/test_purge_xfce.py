@@ -4,7 +4,7 @@
 Name: test_purge_xfce.py
 Purpose: test purge_xfce.py script
 
-source: https://gitlab.com/kevinbowen/xfce-repocapp
+source: https://gitlab.com/kevinbowen/xfrepos
 version: 0.8.7
 updated: 20260828
 @author: kevin.bowen@gmail.com

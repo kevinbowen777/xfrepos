@@ -4,7 +4,7 @@
 Name: clone_xfce.py
 Purpose: Clones Xfce repositories from https://gitlab.xfce.org/
 
-source: https://gitlab.com/kevinbowen/xfce-repocapp
+source: https://gitlab.com/kevinbowen/xfrepos
 version: 0.8.7
 updated: 20260827
 @author: kevin.bowen@gmail.com
@@ -115,5 +115,5 @@ if __name__ == "__main__":
         main(component_group)
     except KeyboardInterrupt:
         print()
-        print("Stopped xfce-repocapp. Exiting...")
+        print("Stopped xfrepos. Exiting...")
         sys.exit()

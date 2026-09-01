@@ -1,4 +1,4 @@
-"""Nox sessions - xfce-repocapp"""
+"""Nox sessions - xfrepos"""
 
 import tempfile
 
