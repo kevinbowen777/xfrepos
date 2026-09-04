@@ -1,6 +1,6 @@
 [project]
 name = "xfrepos"
-version = "0.9.0"
+version = "0.9.1"
 description = "A collection of scripts to maintain local Xfce repositories"
 requires-python = ">=3.12.0, <3.15.0"
 dependencies = []
@@ -33,7 +33,7 @@ package-mode = true
 
 [project.urls]
 Homepage = "https://github.com/kevinbowen777/xfrepos.git"
-Changelog = "https://github.com/kevinbowen777/xfrepos/NEWS"
+Changelog = "https://github.com/kevinbowen777/xfrepos/CHANGELOG.rst"
 Repository = "https://github.com/kevinbowen777/xfrepos.git"
 Documentation = "file:///docs/index.rst"
 
@@ -46,6 +46,10 @@ pytest-cov = ">=7.1.0, <8.0"
 pytest-sugar = "1.1.1"
 coverage = { version = ">=7.0.0, <8.0.0", extras = ["toml"] }
 sphinx = ">= 9.1.0, <10.0"
+towncrier = "26.9.0"
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = ">=1.10.0"
 
 [tool.coverage.run]
 branch = true
@@ -66,6 +70,50 @@ precision = 2
 # show_contexts = true
 title = "xfrepos coverage report"
 
+[tool.pyright]
+# See: https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+include = [
+    "config",
+    "accounts",
+    "pages",
+]
+exclude = [
+    "**/__pycache__",
+]
+ignore = ["docs/html"]
+defineConstant = { DEBUG = true }
+stubPath = ""
+
+# The following may need to be modified when collaborating with others
+venv = "xfrepos-0wHYlrJ7-py3.14"
+venvPath = "~/dev/python/venvs"
+# More portable venv config
+# venvPath = "."
+# venv = ".venv"
+
+typeCheckingMode = "basic"
+useLibraryCodeForTypes = true
+strictListInference = true
+strictDictionaryInference = true
+reportConstantRedefinition = "error"
+reportOptionalCall = "error"
+reportOptionalContextManager = "error"
+reportOptionalIterable = "error"
+reportOptionalMemberAccess = "error"
+reportMissingImports = true
+reportOptionalOperand = "error"
+reportOptionalSubscript = "error"
+reportUnnecessaryCast = "warning"
+reportUnnecessaryComparison = "error"
+reportUnnecessaryTypeIgnoreComment = "warning"
+
+pythonVersion = "3.14"
+pythonPlatform = "Linux"
+
+executionEnvironments = [
+  { root = ".", pythonVersion = "3.14", extraPaths = [ "src", "tests" ] },
+]
+
 [tool.pytest.ini_options]
 addopts = [
     "--import-mode=importlib",
@@ -82,7 +130,7 @@ unsafe-fixes = false
 # Same as Black.
 line-length = 88
 
-# Assume Python 3.13.x
+# Assume Python 3.14.x
 target-version = "py314"
 
 # Exclude a variety of commonly ignored directories.
@@ -99,17 +147,18 @@ exclude = [
 ]
 
 [tool.ruff.lint]
+select = []
 # Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
-select = [
-    "B",    # flake8-bugbear
-    "C90",  # mccabe
-    "E",    # pycodestyle errors
-    "F",    # pyflakes
-    "I",    # isort
-    "S",    # flake8-bandit
-    "W",    # pycodestyle warnings
-    "RUF",  # ruff checks
-]
+# select = [
+#     "B",    # flake8-bugbear
+#     "C90",  # mccabe
+#     "E",    # pycodestyle errors
+#     "F",    # pyflakes
+#     "I",    # isort
+#     "S",    # flake8-bandit
+#     "W",    # pycodestyle warnings
+#     "RUF",  # ruff checks
+# ]
 
 ignore = [
     "line-too-long",    # line too long ({width} > {limit} characters) [E501]
@@ -164,6 +213,64 @@ docstring-code-format = false
 # This only has an effect when the `docstring-code-format` setting is
 # enabled.
 docstring-code-line-length = "dynamic"
+
+[tool.towncrier]
+directory = "changelog/"
+filename = "CHANGELOG.rst"
+
+title_format = "xfrepos {version} ({project_date})"
+issue_format = "`#{issue} <https://github.com/kevinbowen777/xfrepos/issues/{issue}>`_"
+template = "changelog/_template.rst"
+
+[[tool.towncrier.type]]
+# Something we deemed an improper undesired behavior that got corrected
+# in the release to match pre-agreed expectations.
+directory = "bugfix"
+name = "Bug fixes"
+showcontent = true
+
+[[tool.towncrier.type]]
+# Changes that affects the contributor experience. e.g. running tests,
+# building the docs, setting up the development environment.
+directory = "contrib"
+name = "Contributor-facing changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+# Declarations of future API removals and breaking changes in behavior.
+directory = "deprecation"
+name = "Deprecations (removal in next major release)"
+showcontent = true
+
+[[tool.towncrier.type]]
+# Notable updates to the documentation structure or build process.
+directory = "doc"
+name = "Improved documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+# New behaviors, public APIs, etc.
+directory = "feature"
+name = "New features"
+showcontent = true
+
+[[tool.towncrier.type]]
+# Changes that are hard to assign to any of the above categories.
+directory = "misc"
+name = "Miscellaneous internal changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+# Stuff that affects security. e.g. updating packages,
+directory = "security"
+name = "Security updated"
+showcontent = true
+
+[[tool.towncrier.type]]
+# Updates regarding bundling dependencies
+directory = "vendor"
+name = "Vendored libraries"
+showcontent = true
 
 [build-system]
 # requires = ["setuptools", "wheel"]
