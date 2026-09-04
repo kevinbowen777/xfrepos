@@ -26,12 +26,12 @@ function cov:html {
 
 function nox:cov {
   # Check code for formatting violations
-  nox -s coverage-3.13 "${@}"
+  nox -s coverage-3.14 "${@}"
 }
 
 function nox:docs {
   # Create Sphinx documentation in ./docs/_build directory
-  nox -s docs-3.13 "${@}"
+  nox -s docs-3.14 "${@}"
 }
 
 function nox:lint {
@@ -83,8 +83,8 @@ function nox:re-all {
   nox -rs
 }
 function poe:old {
-  # List any installed packages that are outdated
-  poetry show -ol
+  # Show the latest version but only for packages that are outdated
+  poetry show --outdated
 }
 
 function poe:up {

@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
 """
-Name: repocapp.py
-Purpose: Clones Xfce repositories pulled from
-           https://gitlab.xfce.org/
+Name: xfrepos.py
+Purpose: Clones Xfce repositories pulled from https://gitlab.xfce.org/
 
 source: https://gitlab.com/kevinbowen/xfrepos
 version: 0.8.7
-updated: 20260827
+updated: 20260901
 @author: kevin.bowen@gmail.com
 """
 
