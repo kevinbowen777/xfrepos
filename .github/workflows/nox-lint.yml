@@ -1,4 +1,4 @@
-name: nox-lint_multi-arch
+name: nox-lint
 on: push
 permissions: {}
 jobs:
@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.12", "3.13", "3.14"]
+        python-version: ["3.12", "3.13", "3.14", "3.15"]
     name: Python ${{ matrix.python-version }} xfrepos
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -18,8 +18,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
           architecture: x64
-      - run: pip install nox==2026.8.17
-      - run: pip install poetry==2.4.3
-      - run: pip install poetry-plugin-export==1.10.0
+      - run: pip install nox==2026.10.20
+      - run: pip install poetry==2.5.1
+      - run: pip install poetry-plugin-export==1.10.1
       - run: |
           nox -s lint-${{ matrix.python-version }}

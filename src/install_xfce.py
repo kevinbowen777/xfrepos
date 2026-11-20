@@ -1,12 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Name: install._xfce.py
 Purpose: Clean local Xfce repository directories
 
 source: https://gitlab.com/kevinbowen/xfrepos
-version: 0.8.7
-updated: 20260827
+version: 0.10.0
+updated: 202611120
 @author: kevin.bowen@gmail.com
 """
 
@@ -35,7 +35,7 @@ parser.add_argument(
     ],
     help="specify an Xfce component group to install either locally or system-wide.",
 )
-parser.add_argument("--version", action="version", version="%(prog)s 0.8.7")
+parser.add_argument("--version", action="version", version="%(prog)s 0.10.0")
 args = parser.parse_args()
 if args.component is None:
     print(
@@ -52,9 +52,7 @@ def install_xfce(component, comp_list):
 
     def get_path(comp_group):
         # grandparent directory (../../) relative to script.
-        installpath = Path.cwd().parent.parent.joinpath(comp_group)
-
-        return installpath
+        return Path.cwd().parent.parent.joinpath(comp_group)
 
     repopath = get_path(component)
 
@@ -70,14 +68,12 @@ def install_xfce(component, comp_list):
                 )
                 if confirm == "yes":
                     print(f"Installing {item} to the system...")
-                    # ruff: ignore[start-process-with-a-shell]
-                    os.system("sudo make install")  # ruff: ignore[start-process-with-partial-path]
+                    os.system("sudo meson install -C build")
                     print("\u2248" * 16)
                     os.chdir("..")
                 else:
                     print(f"Installing {item} locally...")
-                    # ruff: ignore[start-process-with-a-shell]
-                    os.system("make install")  # ruff: ignore[start-process-with-partial-path]
+                    os.system("make install")
                     print("\u2248" * 16)
                     os.chdir("..")
             else:

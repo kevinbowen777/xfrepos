@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Name: test_clone_xfce.py
 Purpose: test clone_xfce.py script
@@ -24,20 +22,17 @@ class TestCloneXfce(unittest.TestCase):
     def setUp(self):
         """Set up the test features."""
         print("setUp")
-        pass
         # begins with self.
 
     def tearDown(self):
         """Tear down the test features."""
         print("tearDown\n")
-        pass
 
     def test_clone_xfce(self):
         """testing clone_xfce() function"""
         # self.assertIsNotNone(
         #     clone_xfce(component=bindings, comp_list=bindings)
         # )
-        pass
 
 
 class TestMain(unittest.TestCase):
@@ -46,17 +41,14 @@ class TestMain(unittest.TestCase):
     def setUp(self):
         """Set up the test features."""
         print("setUp")
-        pass
 
     def tearDown(self):
         """Tear down the test features."""
         print("tearDown\n")
-        pass
 
     def test_main(self):
         """testing main() function in clone_xfce.py"""
         # self.assertIsNotNone(main(bindings))
-        pass
 
 
 if __name__ == "__main__":

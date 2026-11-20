@@ -1,12 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Name: build.py
 Purpose: Clean local Xfce repository directories
 
 source: https://gitlab.com/kevinbowen/xfrepos
-version: 0.8.7
-updated: 20260827
+version: 0.10.0
+updated: 20261120
 @author: kevin.bowen@gmail.com
 """
 
@@ -34,7 +34,7 @@ parser.add_argument(
     ],
     help="Specify an Xfce component group to build locally.",
 )
-parser.add_argument("--version", action="version", version="%(prog)s 0.8.7")
+parser.add_argument("--version", action="version", version="%(prog)s 0.10.0")
 args = parser.parse_args()
 if args.component is None:
     print(
@@ -54,12 +54,10 @@ def build_xfce(component, comp_list):
 
     def get_path(comp_group):
         # grandparent directory (../../) relative to script.
-        installpath = Path.cwd().parent.parent.joinpath(comp_group)
-
-        return installpath
+        return Path.cwd().parent.parent.joinpath(comp_group)
 
     repopath = get_path(component)
-    os.environ["PKG_CONFIG_PATH"] = "/usr/lib/pkgconfig:/usr"
+    # os.environ["PKG_CONFIG_PATH"] = "/usr/lib/pkgconfig:/usr"
 
     if Path.is_dir(repopath):
         os.chdir(repopath)
@@ -67,12 +65,11 @@ def build_xfce(component, comp_list):
             p = Path(item)
             if p.is_dir():
                 os.chdir(item)
-                print(f"\nRunning autogen.sh for {item} ...\n")
-                os.system("./autogen.sh --prefix=/usr")  # ruff: ignore[start-process-with-a-shell]
-                print(f"\nRunning make for {item} ...\n")
+                print(f"\nConfiguring the {item} project...\n")
+                os.system("meson setup build")
+                print(f"\nBuilding the {item} project...\n")
                 time.sleep(1.5)
-                # ruff: ignore[start-process-with-a-shell]
-                os.system("make")  # ruff: ignore[start-process-with-partial-path]
+                os.system("meson compile -C build")
                 os.chdir("..")
             else:
                 print("\nNothing to do...\n")

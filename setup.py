@@ -1,11 +1,12 @@
+import pathlib
+
 import setuptools
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
+long_description = pathlib.Path("README.md").read_text(encoding="utf-8")
 
 setuptools.setup(
     name="xfrepos-KEVIN-BOWEN",
-    version="0.9.1",
+    version="0.10.0",
     author="Kevin Bowen",
     author_email="kevin.bowen@gmail.com",
     description="Scripts for managing Xfce repositories",
@@ -27,6 +28,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
         "Programming Language :: Python :: 3.14",
+        "Programming Language :: Python :: 3.15",
         "Topic :: Software Development :: Build Tools",
         "Topic :: Software Development :: Version Control :: Git",
     ],

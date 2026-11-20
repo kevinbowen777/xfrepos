@@ -24,7 +24,9 @@ Xfce repository structure (https://gitlab.xfce.org).
      * [Running individual scripts](#running-individual-scripts)
    * [Installation of xfrepos project](#installation-of-xfrepos-project)
    * [List of repository mirrors](#list-of-repository-mirrors)
+   * [Contributions](#contributions)
    * [Reporting Bugs](#reporting-bugs)
+   * [License](#license)
 
 ----
 ### List of scripts
@@ -80,8 +82,24 @@ components(e.g. `pull_xfce -c apps`).
 - https://codeberg.org/kevinbowen/xfrepos
 - http://bitbucket.org/kevinbowen/xfrepos
 
+---
+
+### Contributions
+
+You are free to fork this repository and modify as you see fit. See
+[CONTRIBUTING](https://github.com/kevinbowen777/xfrepos/CONTRIBUTING.md) for details on reporting issues, etc.
+
 ----
+
 ### Reporting Bugs
 
    Visit the [Issues page](https://github.com/kevinbowen777/xfrepos/issues)
      to view currently open bug reports or open a new issue.
+
+---
+
+### License
+
+This project is licensed under the GNU GENERAL PUBLIC LICENSE version 2(GPLv2).
+Refer to the [LICENSE](https://github.com/kevinbowen777/xfrepos/LICENSE) file
+for details.

@@ -4,8 +4,8 @@ Purpose: component lists and query function for use with
            xfrepos.py and associated scripts
 
 source: https://gitlab.com/kevinbowen/xfrepos
-version: 0.8.7
-updated: 20260827
+version: 0.10.0
+updated: 20261120
 @author: kevin.bowen@gmail.com
 """
 
@@ -17,7 +17,7 @@ import tty
 def component_list(component_group_list):
     """returns lists of components."""
     if component_group_list == "apps":
-        apps = [
+        return [
             "catfish",
             "gigolo",
             "mousepad",
@@ -37,14 +37,12 @@ def component_list(component_group_list):
             "xfdashboard",
             "xfmpc",
         ]
-        return apps
 
-    elif component_group_list == "bindings":
-        bindings = ["thunarx-python", "xfce4-rs", "xfce4-vala"]
-        return bindings
+    if component_group_list == "bindings":
+        return ["thunarx-python", "xfce4-rs", "xfce4-vala"]
 
-    elif component_group_list == "panel-plugins":
-        panel_plugins = [
+    if component_group_list == "panel-plugins":
+        return [
             "xfce4-battery-plugin",
             "xfce4-calculator-plugin",
             "xfce4-clipman-plugin",
@@ -78,19 +76,17 @@ def component_list(component_group_list):
             "xfce4-windowck-plugin",
             "xfce4-xkb-plugin",
         ]
-        return panel_plugins
 
-    elif component_group_list == "thunar-plugins":
-        thunar_plugins = [
+    if component_group_list == "thunar-plugins":
+        return [
             "thunar-archive-plugin",
             "thunar-media-tags-plugin",
             "thunar-shares-plugin",
             "thunar-vcs-plugin",
         ]
-        return thunar_plugins
 
-    elif component_group_list == "www":
-        www = [
+    if component_group_list == "www":
+        return [
             "blog.xfce.org",
             "cdn.xfce.org",
             "forum.xfce.org",
@@ -98,10 +94,9 @@ def component_list(component_group_list):
             "wiki.xfce.org",
             "www.xfce.org",
         ]
-        return www
 
-    elif component_group_list == "xfce":
-        xfce = [
+    if component_group_list == "xfce":
+        return [
             "exo",
             "garcon",
             "libxfce4ui",
@@ -122,10 +117,9 @@ def component_list(component_group_list):
             "xfwl4",
             "xfwm4",
         ]
-        return xfce
 
-    elif component_group_list == "all_components":
-        all_components = {
+    if component_group_list == "all_components":
+        return {
             "apps": "apps",
             "bindings": "bindings",
             "panel-plugins": "panel-plugins",
@@ -133,10 +127,8 @@ def component_list(component_group_list):
             "xfce": "xfce",
             "www": "www",
         }
-        return all_components
 
-    else:
-        return None
+    return []
 
 
 def press_any_key():
@@ -163,9 +155,9 @@ def query_yes_no(question, answer="no"):
         sys.stdout.write(question + prompt)
         choice = input().lower()
         try:
-            if answer is not None and choice == "":
+            if choice == "":
                 return answer
-            elif answer in valid:
+            if answer in valid:
                 return valid[choice]
         except KeyError:
             sys.stdout.write("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")

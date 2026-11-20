@@ -20,6 +20,9 @@
 !*.misc
 !*.misc.rst
 !*.misc.*.rst
+!*.security
+!*.security.rst
+!*.security.*.rst
 !*.vendor
 !*.vendor.rst
 !*.vendor.*.rst

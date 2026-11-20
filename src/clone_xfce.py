@@ -1,18 +1,18 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Name: clone_xfce.py
 Purpose: Clones Xfce repositories from https://gitlab.xfce.org/
 
 source: https://gitlab.com/kevinbowen/xfrepos
-version: 0.8.7
-updated: 20260827
+version: 0.10.0
+updated: 20261120
 @author: kevin.bowen@gmail.com
 """
 
 import argparse
 import os
-import subprocess  # ruff: ignore[suspicious-subprocess-import]
+import subprocess
 import sys
 from pathlib import Path
 
@@ -37,7 +37,7 @@ parser.add_argument(
     ],
     help="specify an Xfce component group to clone from https://gitlab.xfce.org",
 )
-parser.add_argument("--version", action="version", version="%(prog)s 0.8.7")
+parser.add_argument("--version", action="version", version="%(prog)s 0.10.0")
 args = parser.parse_args()
 if args.component is None:
     print(
@@ -58,14 +58,13 @@ def clone_xfce(component, comp_list):
 
     def get_path(comp_group):
         # grandparent directory (../../) relative to script.
-        installpath = Path.cwd().parent.parent.joinpath(comp_group)
-
-        return installpath
+        return Path.cwd().parent.parent.joinpath(comp_group)
 
     repopath = get_path(component)
     success_count = 0
 
-    os.makedirs(repopath, exist_ok=True)
+    # os.makedirs(repopath, exist_ok=True)
+    Path(repopath).mkdir(exist_ok=True, parents=True)
     os.chdir(repopath)
 
     for item in component_list(comp_list):
@@ -76,8 +75,7 @@ def clone_xfce(component, comp_list):
         else:
             try:
                 url = f"https://gitlab.xfce.org/{component}/{item}.git"
-                # ruff: ignore[start-process-with-partial-path]
-                subprocess.run(["git", "clone", url], stdout=None, check=True)  # ruff: ignore[subprocess-without-shell-equals-true]
+                subprocess.run(["git", "clone", url], stdout=None, check=True)
                 success_count += 1
                 print(line_rule)
                 print(f"{item} repository cloned successfully.")
