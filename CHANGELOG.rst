@@ -27,6 +27,28 @@ with advance notice in the **Deprecations** section of releases.
 
 .. towncrier release notes start
 
+xfrepos 0.10.0 (2026-11-20)
+===========================
+
+New features
+------------
+
+-  (`#36 <https://github.com/kevinbowen777/xfrepos/issues/36>`_): Replace autotools with meson
+
+-  (`#37 <https://github.com/kevinbowen777/xfrepos/issues/37>`_): Add support for Python 3.15.x
+
+
+Security updated
+----------------
+
+-  (`#6 <https://github.com/kevinbowen777/xfrepos/issues/6>`_): Resolve issues with subprocess
+
+
+Improved documentation
+----------------------
+
+-  (`#3 <https://github.com/kevinbowen777/xfrepos/issues/3>`_): Add repository mirror links to README
+
 xfrepos 0.9.1 (2026-09-04)
 ==========================
 

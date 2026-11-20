@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Name: test_purge_xfce.py
 Purpose: test purge_xfce.py script
@@ -24,16 +22,13 @@ class TestPurgeXfce(unittest.TestCase):
     def setUp(self):
         """Set up the test features."""
         print("setUp")
-        pass
 
     def tearDown(self):
         """Tear down the test features."""
         print("tearDown\n")
-        pass
 
     def test_purge_xfce(self):
         """testing purge_xfce() function."""
-        pass
 
 
 class TestMain(unittest.TestCase):
@@ -42,16 +37,13 @@ class TestMain(unittest.TestCase):
     def setUp(self):
         """Set up the test features."""
         print("setUp")
-        pass
 
     def tearDown(self):
         """Tear down the test features."""
         print("tearDown\n")
-        pass
 
     def test_main(self):
         """testing main() function in purge_xfce.py"""
-        pass
 
 
 if __name__ == "__main__":

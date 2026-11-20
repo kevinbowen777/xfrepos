@@ -1,8 +1,8 @@
 [project]
 name = "xfrepos"
-version = "0.9.1"
+version = "0.10.0"
 description = "A collection of scripts to maintain local Xfce repositories"
-requires-python = ">=3.12.0, <3.15.0"
+requires-python = ">=3.12.0, <3.16.0"
 dependencies = []
 authors = [
     { name = "Kevin Bowen", email = "kevin.bowen@gmail.com" }
@@ -17,7 +17,6 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
@@ -25,6 +24,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Topic :: Software Development :: Build Tools",
     "Topic :: Software Development :: Version Control :: Git",
 ]
@@ -35,21 +35,20 @@ package-mode = true
 Homepage = "https://github.com/kevinbowen777/xfrepos.git"
 Changelog = "https://github.com/kevinbowen777/xfrepos/CHANGELOG.rst"
 Repository = "https://github.com/kevinbowen777/xfrepos.git"
-Documentation = "file:///docs/index.rst"
+Documentation = "https://github.com/kevinbowen777/xfrepos/README.md"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = ">=4.0, <5.0"
-ruff = ">=0.8, <1.0"
-nox = "2026.8.17"
-pytest = ">=9.0, <10.0"
-pytest-cov = ">=7.1.0, <8.0"
+pre-commit = "4.7.0"
+ruff = "0.17.6"
+nox = "2026.10.20"
+pytest = "9.2.0"
+pytest-cov = "7.1.0"
 pytest-sugar = "1.1.1"
-coverage = { version = ">=7.0.0, <8.0.0", extras = ["toml"] }
-sphinx = ">= 9.1.0, <10.0"
+coverage = { version = "7.17.4", extras = ["toml"] }
 towncrier = "26.9.0"
 
 [tool.poetry.requires-plugins]
-poetry-plugin-export = ">=1.10.0"
+poetry-plugin-export = "1.10.1"
 
 [tool.coverage.run]
 branch = true
@@ -73,20 +72,21 @@ title = "xfrepos coverage report"
 [tool.pyright]
 # See: https://github.com/microsoft/pyright/blob/main/docs/configuration.md
 include = [
-    "config",
-    "accounts",
-    "pages",
+    "src",
 ]
 exclude = [
     "**/__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".nox",
 ]
 ignore = ["docs/html"]
 defineConstant = { DEBUG = true }
 stubPath = ""
 
 # The following may need to be modified when collaborating with others
-venv = "xfrepos-0wHYlrJ7-py3.14"
-venvPath = "~/dev/python/venvs"
+venv = "xfrepos-0wHYlrJ7-py3.15"
+venvPath = "../../../python/venvs/"
 # More portable venv config
 # venvPath = "."
 # venv = ".venv"
@@ -107,20 +107,22 @@ reportUnnecessaryCast = "warning"
 reportUnnecessaryComparison = "error"
 reportUnnecessaryTypeIgnoreComment = "warning"
 
-pythonVersion = "3.14"
+pythonVersion = "3.15"
 pythonPlatform = "Linux"
 
 executionEnvironments = [
-  { root = ".", pythonVersion = "3.14", extraPaths = [ "src", "tests" ] },
+  { root = ".", pythonVersion = "3.15", extraPaths = [ "src", "tests" ] },
 ]
 
 [tool.pytest.ini_options]
+# PYTHONWARNINGS="always"
 addopts = [
     "--import-mode=importlib",
 ]
-python_files = ["tests.py", "test_*.py", "*_tests.py"]
+python_files = ["test_*.py"]
 pythonpath = "src"
-filterwarnings = [ ]
+filterwarnings = [
+]
 
 [tool.ruff]
 preview = true
@@ -130,15 +132,16 @@ unsafe-fixes = false
 # Same as Black.
 line-length = 88
 
-# Assume Python 3.14.x
-target-version = "py314"
+# Assume Python 3.15.x
+target-version = "py315"
 
 # Exclude a variety of commonly ignored directories.
 exclude = [
     ".git",
-    ".mypy_cache",
     ".nox",
     ".ruff_cache",
+    ".pytest_cache",
+    "__pycache__",
     "__pypackages__",
     "_build",
     "build",
@@ -147,18 +150,25 @@ exclude = [
 ]
 
 [tool.ruff.lint]
-select = []
-# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
-# select = [
-#     "B",    # flake8-bugbear
-#     "C90",  # mccabe
-#     "E",    # pycodestyle errors
-#     "F",    # pyflakes
-#     "I",    # isort
-#     "S",    # flake8-bandit
-#     "W",    # pycodestyle warnings
-#     "RUF",  # ruff checks
-# ]
+# select = [...] See the https://docs.astral.sh/ruff/default-rules/
+extend-select = [
+    "F",        # Pyflakes rules
+    "W",        # PyCodeStyle warnings
+    "E",        # PyCodeStyle errors
+    "I",        # Sort imports properly
+    "UP",       # Warn if certain things can changed due to newer Python versions
+    "C4",       # Catch incorrect use of comprehensions, dict, list, etc
+    "FA",       # Enforce from __future__ import annotations
+    "ISC",      # Good use of string concatenation
+    "ICN",      # Use common import conventions
+    "RET",      # Good return practices
+    "SIM",      # Common simplification rules
+    "TID",      # Some good import practices
+    "TC",       # Enforce importing certain types in a TYPE_CHECKING block
+    "PTH",      # Use pathlib instead of os.path
+    "TD",       # Be diligent with TODO comments
+    "FURB",     # Suggest more idiomatic Python patterns
+]
 
 ignore = [
     "line-too-long",    # line too long ({width} > {limit} characters) [E501]
@@ -169,19 +179,14 @@ ignore = [
 ]
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
-fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
+fixable = ["ALL"]
 unfixable = []
 
 # Allow unused variables when underscore-prefixed.
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+dummy-variable-rgx = "^(_+|(_+[\\p{XID_Continue}]*[\\p{XID_Continue}--_]+?))$"
 
 [tool.ruff.lint.per-file-ignores]
-# "src/test.py" = ["S101", "S106"]
-# "src/build_xfce.py" = ["S605", "S607"]
-# "src/clean_xfce.py" = ["S605", "S607"]
-# "src/clone_xfce.py" = ["S404", "S603", "S607"]
-# "src/install_xfce.py" = ["S605", "S607"]
-# "src/pull_xfce.py" = ["S605", "S607"]
+"**/test_*.py" = ["S101"]
 
 [tool.ruff.lint.mccabe]
 # Unlike Flake8, default to a complexity level of 10.
@@ -223,10 +228,34 @@ issue_format = "`#{issue} <https://github.com/kevinbowen777/xfrepos/issues/{issu
 template = "changelog/_template.rst"
 
 [[tool.towncrier.type]]
+# Declarations of future API removals and breaking changes in behavior.
+directory = "deprecation"
+name = "Deprecations (removal in next major release)"
+showcontent = true
+
+[[tool.towncrier.type]]
+# New behaviors, public APIs, etc.
+directory = "feature"
+name = "New features"
+showcontent = true
+
+[[tool.towncrier.type]]
 # Something we deemed an improper undesired behavior that got corrected
 # in the release to match pre-agreed expectations.
 directory = "bugfix"
 name = "Bug fixes"
+showcontent = true
+
+[[tool.towncrier.type]]
+# Stuff that affects security. e.g. updating packages,
+directory = "security"
+name = "Security updated"
+showcontent = true
+
+[[tool.towncrier.type]]
+# Notable updates to the documentation structure or build process.
+directory = "doc"
+name = "Improved documentation"
 showcontent = true
 
 [[tool.towncrier.type]]
@@ -237,33 +266,9 @@ name = "Contributor-facing changes"
 showcontent = true
 
 [[tool.towncrier.type]]
-# Declarations of future API removals and breaking changes in behavior.
-directory = "deprecation"
-name = "Deprecations (removal in next major release)"
-showcontent = true
-
-[[tool.towncrier.type]]
-# Notable updates to the documentation structure or build process.
-directory = "doc"
-name = "Improved documentation"
-showcontent = true
-
-[[tool.towncrier.type]]
-# New behaviors, public APIs, etc.
-directory = "feature"
-name = "New features"
-showcontent = true
-
-[[tool.towncrier.type]]
 # Changes that are hard to assign to any of the above categories.
 directory = "misc"
 name = "Miscellaneous internal changes"
-showcontent = true
-
-[[tool.towncrier.type]]
-# Stuff that affects security. e.g. updating packages,
-directory = "security"
-name = "Security updated"
 showcontent = true
 
 [[tool.towncrier.type]]

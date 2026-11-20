@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Name: purge_xfce.py
@@ -6,8 +6,8 @@ Purpose: Delete local Xfce repositories installed by clone_xfce.py from
            https://gitlab.xfce.org
 
 source: https://gitlab.com/kevinbowen/xfrepos
-version: 0.8.7
-updated: 20260827
+version: 0.10.0
+updated: 20261120
 @author: kevin.bowen@gmail.com
 """
 
@@ -37,7 +37,7 @@ parser.add_argument(
     ],
     help="Specify an Xfce component group to delete.",
 )
-parser.add_argument("--version", action="version", version="%(prog)s 0.8.7")
+parser.add_argument("--version", action="version", version="%(prog)s 0.10.0")
 args = parser.parse_args()
 if args.component is None:
     print(
@@ -54,9 +54,7 @@ def purge_xfce(component, comp_list):
 
     def get_path(comp_group):
         # grandparent directory (../../) relative to script.
-        installpath = Path.cwd().parent.parent.joinpath(comp_group)
-
-        return installpath
+        return Path.cwd().parent.parent.joinpath(comp_group)
 
     repopath = get_path(component)
     success_count = 0

@@ -1,0 +1,28 @@
+name: nox-audit
+on: push
+permissions: {}
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13", "3.14", "3.15"]
+    name: Python ${{ matrix.python-version }} django-start
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
+          architecture: x64
+      - run: pip install nox==2026.10.20
+      - run: pip install poetry==2.5.1
+      - run: pip install poetry-plugin-export==1.10.1
+      - run: |
+          export SECRET_KEY=${{ secrets.SECRET_KEY }}
+          export EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }}
+          export DATABASE_URL=${{ secrets.DATABASE_URL }}
+          nox -s audit-${{ matrix.python-version }}

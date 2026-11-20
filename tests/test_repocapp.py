@@ -19,20 +19,17 @@ class TestMainMenu(unittest.TestCase):
     def setUp(self):
         """Set up the test features."""
         print("setUp")
-        pass
         # begins with self.
 
     def tearDown(self):
         """Tear down the test features."""
         print("tearDown\n")
-        pass
 
     def test_xfce_repocapp(self):
         """testing cappdata functions"""
         # self.assertIsNotNone(
         #     clone_xfce(component=bindings, comp_list=bindings)
         # )
-        pass
 
 
 class TestSubMenus(unittest.TestCase):
@@ -41,17 +38,14 @@ class TestSubMenus(unittest.TestCase):
     def setUp(self):
         """Set up the test features."""
         print("setUp")
-        pass
 
     def tearDown(self):
         """Tear down the test features."""
         print("tearDown\n")
-        pass
 
     def test_main(self):
         """testing main() function in cappdata.py"""
         # self.assertIsNotNone(main(bindings))
-        pass
 
 
 if __name__ == "__main__":

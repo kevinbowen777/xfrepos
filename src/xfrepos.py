@@ -1,17 +1,17 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Name: xfrepos.py
 Purpose: Clones Xfce repositories pulled from https://gitlab.xfce.org/
 
 source: https://gitlab.com/kevinbowen/xfrepos
-version: 0.8.7
-updated: 20260901
+version: 0.10.0
+updated: 20261120
 @author: kevin.bowen@gmail.com
 """
 
 import os
-import subprocess  # ruff: ignore[suspicious-subprocess-import]
+import subprocess
 import sys
 from pathlib import Path
 
@@ -78,7 +78,7 @@ os.chdir(path)
 
 def main_menu():
     """Display selection of available actions to take with repositories."""
-    os.system("/usr/bin/clear")  # ruff: ignore[start-process-with-a-shell]
+    os.system("/usr/bin/clear")
     main_banner = "\u2248: xfrepos: local Xfce repository maintenance :\u2248"
     border = "\u2248" * len(main_banner)
     print(f"{border}\n{main_banner}\n{border}")
@@ -100,23 +100,24 @@ def main_menu():
             else:
                 action = main_list[choice - 1]
                 sub_menus(action)
-    except ValueError, EOFError:
+    except ValueError:
         print("Invalid input. Try again.")
         main_menu()
 
 
 def sub_menus(action):
     """Display actions to take upon a specific repository."""
-    os.system("/usr/bin/clear")  # ruff: ignore[start-process-with-a-shell]
+    os.system("/usr/bin/clear")
     banner = f"\u2248: xfrepos: {action} local Xfce repositories :\u2248"
     border = "\u2248" * len(banner)
     print(f"{border}\n{banner}\n{border}")
-    selection = list(range(1, len(menus[action]) + 1))
+    selection = list(range(1, len(menus[action]) + 3))
     for select, component in zip(selection, menus[action], strict=False):
         print(f"{select}. {action.title()} {component}")
     # Add numbers to selection list for menu options not in action list.
-    selection.append(selection[-1] + 1)
-    selection.append(selection[-1] + 1)
+    # selection.append(selection[-1] + 1)
+    # selection.append(selection[-1] + 1)
+    # selection.extend((selection[-1] + 1, selection[-1] + 1))
     print(f"{selection[-2]}. Return to Main Menu")
     print(f"{selection[-1]}. Quit")
     print(f"{border}")
@@ -139,10 +140,10 @@ def sub_menus(action):
                     component = component_list[answer - 1]
                 script = action + "_xfce.py"
                 command = f"{path}/{script} -c {component}"
-                subprocess.run([command], shell=True)  # ruff: ignore[subprocess-popen-with-shell-equals-true]
+                subprocess.run([command], check=False, shell=True)
                 press_any_key()
                 main_menu()
-    except ValueError, EOFError:
+    except ValueError:
         print("Invalid input. Try again.")
         sub_menus(action)
 

@@ -1,12 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Name: clean_xfce.py
 Purpose: Clean local Xfce repository directories
 
 source: https://gitlab.com/kevinbowen/xfrepos
-version: 0.8.7
-updated: 20260827
+version: 0.10.0
+updated: 20261120
 @author: kevin.bowen@gmail.com
 """
 
@@ -36,7 +36,7 @@ parser.add_argument(
     ],
     help="Specify an Xfce component group directory to clean.",
 )
-parser.add_argument("--version", action="version", version="%(prog)s 0.8.7")
+parser.add_argument("--version", action="version", version="%(prog)s 0.10.0")
 args = parser.parse_args()
 if args.component is None:
     print(
@@ -56,9 +56,7 @@ def clean_xfce(component, comp_list):
 
     def get_path(comp_group):
         # grandparent directory (../../) relative to script.
-        installpath = Path.cwd().parent.parent.joinpath(comp_group)
-
-        return installpath
+        return Path.cwd().parent.parent.joinpath(comp_group)
 
     repopath = get_path(component)
     success_count = 0
@@ -71,8 +69,8 @@ def clean_xfce(component, comp_list):
                 os.chdir(item)
                 print(f"\nCleaning {item} directory...\n")
                 time.sleep(1.5)
-                # ruff: ignore[start-process-with-a-shell]
-                os.system("make -s clean")  # ruff: ignore[start-process-with-partial-path]
+                os.system("rm -rf build")
+                # os.system("make -s clean")
                 success_count += 1
                 print(f"\nExiting {item} directory...\n")
                 print(

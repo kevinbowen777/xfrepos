@@ -4,8 +4,8 @@ import tempfile
 
 import nox
 
-PYTHON_VERSIONS = ["3.12", "3.13", "3.14"]
-nox.options.sessions = ["lint", "coverage", "tests"]
+PYTHON_VERSIONS = ["3.12", "3.13", "3.14", "3.15"]
+nox.options.sessions = ["audit", "lint", "coverage", "tests"]
 locations = (
     "src",
     "./noxfile.py",
@@ -44,20 +44,13 @@ def install_with_constraints(session, *args, **kwargs):
 
 @nox.session(python=PYTHON_VERSIONS)
 def coverage(session):
-    """Build JSON coverage report."""
+    """Build HTML & JSON coverage reports."""
     install_with_constraints(session, "coverage")
     session.run("coverage", "run", "-p", "-m", "pytest")
     session.run("coverage", "combine")
     session.run("coverage", "report", "-m", "--skip-covered")
     session.run("coverage", "json", "-o", "htmlcov/coverage.json")
     session.run("coverage", "html")
-
-
-@nox.session(python=PYTHON_VERSIONS)
-def docs(session):
-    """Build the documentation."""
-    install_with_constraints(session, "sphinx")
-    session.run("sphinx-build", "docs", "docs/_build")
 
 
 @nox.session(python=PYTHON_VERSIONS)
@@ -85,6 +78,10 @@ def audit(session):
         "pip-audit",
         "--desc",
         "--aliases",
+        # nox-audit ignore vulnerability format
+        # <package_name> <version_number> - <CVE Identifier (CVE-2026-XXXXX)
+        # "--ignore-vuln",
+        # "GHSA-XXXX-XXXX-XXXX",
     )
 
 
@@ -103,7 +100,6 @@ def tests(session):
             external=True,
         )
         session.install("-r", f"{requirements.name}")
-    # session.run("poetry", "install", "--no-dev", external=True)
     install_with_constraints(
         session,
         "coverage[toml]",
@@ -117,5 +113,6 @@ def tests(session):
         "-Im",
         "pytest",
         *args,
+        # "--cov-context=test",
         # "--capture=no",
     )
